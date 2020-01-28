@@ -1,0 +1,52 @@
+{
+  "name": "basic-scaffold",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/*"
+  ],
+  "dependencies": {
+    "ajv": "^6.11.0",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@justingorham/tsjsvg": "^1.0.5",
+    "@types/jest": "^25.1.0",
+    "barrelsby": "^2.2.0",
+    "husky": "^4.2.1",
+    "jest": "^25.1.0",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.0.3",
+    "npm-run-all": "^4.1.5",
+    "pre-commit": "run-s autogenerate",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.1",
+    "ts-jest": "^25.0.0",
+    "ts-node": "^8.6.2",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.1.0",
+    "typescript": "^3.7.5"
+  },
+  "scripts": {
+    "autogenerate": "run-s autogenerate:model-validator autogenerate:barrel",
+    "autogenerate:barrel": "barrelsby --config barrelsby.json && git add src/index.ts",
+    "autogenerate:model-validator": "tsjsvg generate -p src/models/**/*.ts -f src/model-validator.ts && tslint --fix src/model-validator.ts && git add src/model-validator.ts",
+    "build": "run-s clean autogenerate compile",
+    "clean": "rimraf lib",
+    "compile": "tsc -b",
+    "generate-json-validator": "tsjsvg generate -p src/models/**/*.ts -f src/models.ts",
+    "lint-staged": "lint-staged",
+    "postinstall": "lerna bootstrap",
+    "pre-commit": "",
+    "prepack": "npm run build",
+    "prettier": "prettier",
+    "test": "jest",
+    "tslint": "tslint"
+  },
+  "keywords": [],
+  "author": "Justin Gorham (https://justin.gorh.am)",
+  "license": "ISC"
+}
