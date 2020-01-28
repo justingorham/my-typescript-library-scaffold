@@ -38,11 +38,14 @@ export const schema = {
         name: {
           type: 'string'
         },
+        permission: {
+          type: 'string'
+        },
         size: {
           type: 'number'
         }
       },
-      required: ['name', 'size', 'content'],
+      required: ['name', 'size', 'content', 'permission'],
       type: 'object'
     }
   }
